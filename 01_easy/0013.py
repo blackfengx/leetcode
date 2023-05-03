@@ -34,4 +34,32 @@ M = 1000
 
 class Solution(object):
     def romanToInt(self, s):
-        "test"
+        total = 0
+        for i in range(len(s)):
+            if i > 0 and s[i] == "V" and s[i-1] == "I":
+                total -= 2
+            if i > 0 and s[i] == "X" and s[i-1] == "I":
+                total -= 2
+            if i > 0 and s[i] == "L" and s[i-1] == "X":
+                total -= 20
+            if i > 0 and s[i] == "C" and s[i-1] == "X":
+                total -= 20
+            if i > 0 and s[i] == "D" and s[i-1] == "C":
+                total -= 200
+            if i > 0 and s[i] == "M" and s[i-1] == "C":
+                total -= 200
+            if s[i] == "I":
+                total += 1
+            if s[i] == "V":
+                total += 5
+            if s[i] == "X":
+                total += 10
+            if s[i] == "L":
+                total += 50
+            if s[i] == "C":
+                total += 100
+            if s[i] == "D":
+                total += 500
+            if s[i] == "M":
+                total += 1000
+        return total
