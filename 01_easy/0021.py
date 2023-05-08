@@ -6,6 +6,12 @@
 # Input: list1 = [1,2,4], list2 = [1,3,4]
 # Output: [1,1,2,3,4,4]
 
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 class Solution(object):
     def mergeTwoLists(self, list1, list2):
         """
@@ -13,6 +19,20 @@ class Solution(object):
         :type list2: Optional[ListNode]
         :rtype: Optional[ListNode]
         """
-        merged_list = list1 + list2
-        merged_list.sort()
-        sorted_list = sorted(merged_list)
+        dummy = ListNode(0)
+        current = dummy
+
+        while list1 and list2:
+            if list1.val <= list2.val:
+                current.next = list1
+                list1 = list1.next
+            else:
+                current.next = list2
+                list2 = list2.next
+            current = current.next
+        if list1:
+            current.next = list1
+        elif list2:
+            current.next = list2
+
+        return dummy.next
